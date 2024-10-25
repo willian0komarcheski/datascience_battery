@@ -1,0 +1,19 @@
+# Ignorar arquivos de configuração
+.env
+
+# Ignorar pastas de build
+/build/
+/dist/
+/__pycache__/
+
+# Ignorar arquivos temporários
+*.tmp
+*.log
+
+# Ignorar diretórios do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de dependências
+node_modules/
+venv/
