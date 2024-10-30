@@ -7,7 +7,7 @@
 # BATCH_SIZE = 32
 # IS_TRAINING = True
 
-# requisitos do ambiente
+#configurações de ambiente
 # !pip install numpy==1.23.5
 # !pip install pandas==1.3.5
 # !pip install tensorflow==2.8
@@ -21,13 +21,14 @@ EARLY_STOPPING = 25
 STEP_LR = LEARNING_RATE/100
 IS_TRAINING = True
 
-#variavel pra treinar ou carregar pesos, == True pra treinar e == False pra carregar pesos
+# variavel pra treinar ou carregar pesos, == True pra treinar e == False pra carregar pesos
 TREINAR = False
 
-path_input = "./data/input/battery-data-set"
-path_output = "./data/output/pesos.h5"
-path_pesos = "./data/output/pesos.h5"
+path_input = "./data/input/battery-data-set" #onde esta os dados de entrada/treinamento
+path_output = "./data/output/pesosteste.h5" #onde sera salvo os pesos e com qual nome
+path_pesos = "./data/output/pesos.h5" #qual peso sera carregado
 
+# testes
 experiment0 = ["B0005", "B0006", "B0007", "B0018",
                "B0025", "B0026", "B0027", "B0028",
                "B0029", "B0030", "B0031", "B0032",

@@ -1,3 +1,4 @@
+#processamento de dados para usar na rede neural
 from sklearn.model_selection import train_test_split
 import os
 import numpy as np
@@ -5,17 +6,19 @@ import pandas as pd
 from scipy.io import loadmat
 from config import path_input as path
 
-#se for necessario mudar os dados de treinamento precisa somente mudar
-#esse arquivo e chamar a nova funcao criada como "get_exp_based_df" que o resto funcionara normalmente, claro, prestando bastante atenção aos limites do tensorflow e  do array numpy
 
-#processamento de dados para usar na rede neural
+# se for necessario mudar os dados de treinamento precisa somente mudar
+# esse arquivo e chamar a nova funcao criada como "get_exp_based_df"
+# que o resto funcionara normalmente, claro, prestando bastante atenção aos limites do tensorflow e  do array numpy
 
+
+# cria um array numpy com o tamanho informado "shape" e preenche ela com zeros, depois adiciona no inicio do array numpy os valores da lista "l"
 def to_padded_numpy(l, shape):
     padded_array = np.zeros(shape)
     padded_array[:len(l)] = l
     return padded_array
 
-
+# pega os dados dos arquivos .mat e separa eles em ciclos e transforma em dataframes
 def preprocess_data_to_cycles():
     dis = os.listdir(path)
     dis_mat = []
@@ -86,7 +89,9 @@ def preprocess_data_to_cycles():
 
     return Cycles
 
-
+# função principal, usa as outras funções criadas para formatar os dados de maneira certa,
+# muito importante que se for substituir esse codigo e colocar outro pra processar outros dados,
+# o retorno da função deve ser igual a essa
 def get_exp_based_df(exp):
     Cycles = preprocess_data_to_cycles()
     df_all = pd.DataFrame({})
@@ -116,14 +121,17 @@ def get_exp_based_df(exp):
         except:
             pass
 
+    # cria 2 dataframes a partir dos dados recebidos, uma para ser o 'target' que fica como a coluna de capacidade e outra fica para ser as caracteristicas
     df_x = df.drop(columns=['Capacity', 'ambient_temperatures']).values
     df_y = df['Capacity'].values
 
+    # cria um array numpy que recebe os dados "cacacteristicas" e padroniza os dados, deixando todos com o mesmo tamanho,
+    # os que nao tem dados suficientes para preencher o array tem o restante preenchido por zeros
     n, m = df_x.shape[0], df_x.shape[1]
     temp2 = np.zeros((n, m, max_len))
     for i in range(n):
         for j in range(m):
             temp2[i][j] = to_padded_numpy(df_x[i][j], max_len)
-
+    #retorna as caracteristicas como um array numpy "df_x" e a capacidade como um dataframe "df_y"
     df_x = temp2
     return df_x, df_y

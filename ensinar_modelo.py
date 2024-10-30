@@ -1,3 +1,4 @@
+#função de simplificação, serve para treinar o modelo
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from config import  BATCH_SIZE, EARLY_STOPPING, IS_TRAINING, NUM_EPOCHS, STEP_LR

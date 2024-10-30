@@ -1,3 +1,4 @@
+# separa os dados retornados pelas função get_exp_based_df para dados de treino e dados de teste e depois converte os dados para float32
 from sklearn.model_selection import train_test_split
 from processar_dados import get_exp_based_df
 
